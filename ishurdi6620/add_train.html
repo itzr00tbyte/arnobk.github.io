@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Train Schedule | Ishurdi 6620 Web UI Data Entry</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <h1>Train Schedule | Ishurdi 6620 Web UI Data Entry</h1>
+    </div>
+    </br>
+    </br>
+    <div class="container">
+        <div id="error_box">
+
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="trainId">Train ID</label>
+                <input type="number" class="form-control" id="trainId">
+            </div>
+            <div class="form-group">
+                <label for="up_down">Up/Down</label>
+                <select class="form-control" id="up_down">
+                    <option>UP</option>
+                    <option>DOWN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="trainType">Train Type</label>
+                <select class="form-control" id="trainType">
+                    <option>Intercity</option>
+                    <option>Mail/Express</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">Train Name</label>
+                <input type="text" class="form-control" id="title">
+            </div>
+            <div class="form-group">
+                <label for="offday">Offday</label>
+                <select class="form-control" id="offday">
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="from">From</label>
+                <select class="form-control" id="from">
+                    <option>Ishurdi</option>
+                    <option>Ishurdi Bypass</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input type="text" class="form-control" id="to">
+            </div>
+            <div class="form-group">
+                <label for="departure">Departure Time</label>
+                <input type="text" class="form-control" id="departure" placeholder="When the train leaves Ishurdi.">
+            </div>
+            <div class="form-group">
+                <label for="arrival">Arrival Time</label>
+                <input type="text" class="form-control" id="arrival"
+                    placeholder="When the train will reach destination.">
+            </div>
+            <div class="form-group">
+                <label for="passkey">KEY</label>
+                <input type="text" class="form-control" id="key" placeholder="Enter Your Key">
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="storeData()">Submit</button>
+
+        </form>
+        </br>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+    <script>
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBW0MOLsRYeN7UuzhcjNwJ89cYLY46j1gw",
+            authDomain: "ishurdi-6620.firebaseapp.com",
+            databaseURL: "https://ishurdi-6620.firebaseio.com",
+            projectId: "ishurdi-6620",
+            storageBucket: "ishurdi-6620.appspot.com",
+            messagingSenderId: "426827563335",
+            appId: "1:426827563335:web:9f7e094b1f19b96a2e0c62",
+            measurementId: "G-4SB2QC6CGD"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+    <script>
+
+        var db = firebase.firestore();
+
+        function storeData() {
+
+
+            var trainId = document.getElementById("trainId").value;
+            var upDown = document.getElementById("up_down").value;
+            var trainType = document.getElementById("trainType").value;
+            var title = document.getElementById("title").value;
+            var offday = document.getElementById("offday").value;
+            var from = document.getElementById("from").value;
+            var to = document.getElementById("to").value;
+            var departure = document.getElementById("departure").value;
+            var arrival = document.getElementById("arrival").value;
+            var key = document.getElementById("key").value;
+
+            if (key == "ishurdi6620") {
+
+                console.log(trainId + ' ' + upDown + ' ' + title +
+                    ' ' + offday + ' ' + from + ' ' + to + ' ' + departure
+                    + ' ' + arrival + ' ' + trainType);
+
+                db.collection("train-schedule").doc(trainId).set({
+                    trainId: trainId,
+                    arrival: arrival,
+                    departure: departure,
+                    from: from,
+                    to: to,
+                    title: title,
+                    up_down: upDown,
+                    offday: offday,
+                    trainType: trainType
+                })
+                    .then(function () {
+                        console.log("Doc successful");
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing doc", error);
+                    });
+                    
+                document.getElementById('error_box').innerHTML = '<div class="alert alert-success" role="alert">Successfully Saved Data!</div>';
+
+
+            } else {
+                document.getElementById('error_box').innerHTML = '<div class="alert alert-danger" role="alert">Something Went Wrong!</div>';
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>
