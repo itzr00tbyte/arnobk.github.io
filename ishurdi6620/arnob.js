@@ -1,4 +1,5 @@
 while (true) {
+    await new Promise(r => setTimeout(r, 3000));
     document.getElementById('counter').innerHTML = 9;
     var answerId;
     switch (question_id) {
@@ -158,5 +159,4 @@ while (true) {
 
     checkAnswer(answerId);
 
-    await new Promise(r => setTimeout(r, 2000));
 }
