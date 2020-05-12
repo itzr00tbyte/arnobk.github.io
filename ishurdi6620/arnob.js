@@ -1,7 +1,6 @@
 async function sleep() {
     await new Promise(r => setTimeout(r, 3000));
 }
-while (true) {
     sleep();
     document.getElementById('counter').innerHTML = 9;
     var answerId;
@@ -162,4 +161,3 @@ while (true) {
 
     checkAnswer(answerId);
 
-}
