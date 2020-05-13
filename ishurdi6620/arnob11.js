@@ -1,5 +1,5 @@
 async function sleep() {
-    await new Promise(r => setTimeout(r, 6000));
+    await new Promise(r => setTimeout(r, 3000));
 }
 sleep();
 var answerId;
