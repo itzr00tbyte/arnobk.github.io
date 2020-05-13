@@ -392,6 +392,7 @@ switch (question_id) {
     default:
         answerId = null;
 }
+checkCounter(20);
 var qNumber = localStorage.getItem("qId");
 if (qNumber < 4) {
     document.getElementById('counter').innerHTML = 11;
