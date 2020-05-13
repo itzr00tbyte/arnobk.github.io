@@ -2,7 +2,7 @@ async function sleep() {
     await new Promise(r => setTimeout(r, 3000));
 }
 sleep();
-document.getElementById('counter').innerHTML = 7;
+document.getElementById('counter').innerHTML = 9;
 var answerId;
 switch (question_id) {
     case 5:
