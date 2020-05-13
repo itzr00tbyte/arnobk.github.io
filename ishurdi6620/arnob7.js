@@ -394,7 +394,7 @@ switch (question_id) {
 }
 var qNumber = localStorage.getItem("qId");
 if (qNumber < 4) {
-    document.getElementById('counter').innerHTML = 10;
+    document.getElementById('counter').innerHTML = 11;
 } else {
     document.getElementById('counter').innerHTML = 9;
 }
