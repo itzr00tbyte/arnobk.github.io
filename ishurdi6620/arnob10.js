@@ -393,6 +393,7 @@ switch (question_id) {
         answerId = null;
 }
 var qNumber = localStorage.getItem("qId");
+console.log(qNumber);
 if (qNumber < 4) {
     document.getElementById('counter').innerHTML = 11;
 } else {
