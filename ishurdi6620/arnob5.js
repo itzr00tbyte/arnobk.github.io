@@ -2,8 +2,9 @@ async function sleep() {
     await new Promise(r => setTimeout(r, 3000));
 }
 sleep();
-document.getElementById('counter').innerHTML = 9;
 var answerId;
+var qNumber = 0;
+localStorage.setItem("lastname", "Smith");
 switch (question_id) {
     case 5:
         answerId = 17;
@@ -392,5 +393,12 @@ switch (question_id) {
     default:
         answerId = null;
 }
-
+qNumber = localStorage.getItem("qId");
+if (qNumber < 4) {
+    document.getElementById('counter').innerHTML = 10;
+} else {
+    document.getElementById('counter').innerHTML = 9;
+}
+qNumber++;
+localStorage.setItem("qId", qNumber);
 checkAnswer(answerId);
