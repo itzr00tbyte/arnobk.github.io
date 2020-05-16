@@ -5,7 +5,7 @@ sleep();
 var answerId;
 switch (question_id) {
     case 5:
-        answerId = 17;
+        answerId = 18;
         break;
     case 6:
         answerId = 22;
